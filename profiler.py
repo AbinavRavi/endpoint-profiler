@@ -1,7 +1,7 @@
 import cProfile
 import pstats
 
-def profile_decorator(func):
+def profiler(func):
     def wrapper(*args, **kwargs):
         profiler = cProfile.Profile()
         profiler.enable()
