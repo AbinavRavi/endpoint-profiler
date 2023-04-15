@@ -4,8 +4,9 @@ from profiler import profiler
 
 app = FastAPI()
 
-@profiler
+
 @app.get('/')
+@profiler
 def test_function():
     print("Hello")
     time.sleep(10)

@@ -4,16 +4,14 @@ import logging
 
 
 def profiler(func):
-    def wrapper(*args, **kwargs):
-        logger = logging.getLogger()
-        logging.basicConfig(level = logging.DEBUG)
+    def wrapper():
         profiler = cProfile.Profile()
         profiler.enable()
-        result = func(*args, **kwargs)
+        result = func()
         profiler.disable()
-        logger.info(profiler.print_stats())
-        stats = pstats.Stats(profiler).sort_stats('tottime')
-        stats.dump_stats('/profile.csv')
+        profiler.print_stats()
+        stats = pstats.Stats(profiler)
+        stats.sort_stats(pstats.SortKey.TIME)
         stats.print_stats()
         return result
     return wrapper
