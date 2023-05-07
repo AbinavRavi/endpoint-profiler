@@ -1,12 +1,14 @@
 import cProfile
 import pstats
+import functools
 
 
 def profiler(func):
-    def wrapper():
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
         profiler = cProfile.Profile()
         profiler.enable()
-        result = func()
+        result = func(*args, **kwargs)
         profiler.disable()
         profiler.print_stats()
         stats = pstats.Stats(profiler)
