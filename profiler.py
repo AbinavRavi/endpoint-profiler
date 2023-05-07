@@ -1,6 +1,5 @@
 import cProfile
 import pstats
-import logging
 
 
 def profiler(func):
